@@ -75,8 +75,6 @@ services:
     command: -config.file=/etc/loki/loki-config.yaml
     expose:
       - 3100
-    ports:
-      - 3100:3100
     restart: always
     networks:
       - monitor-net
