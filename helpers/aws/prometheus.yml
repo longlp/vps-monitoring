@@ -32,22 +32,22 @@ scrape_configs:
 
 
 # sample scrape configuration for AWS EC2
-  - job_name: 'nodeexporter'
-    ec2_sd_configs:
-      - region: us-east-1
-        port: 9100
-    relabel_configs:
-        # Only monitor instances which have a tag called Monitoring "Monitoring"
-      - source_labels: [__meta_ec2_tag_Monitoring]
-        regex: On
-        action: keep
+  # - job_name: 'nodeexporter'
+  #   ec2_sd_configs:
+  #     - region: us-east-1
+  #       port: 9100
+  #   relabel_configs:
+  #       # Only monitor instances which have a tag called Monitoring "Monitoring"
+  #     - source_labels: [__meta_ec2_tag_Monitoring]
+  #       regex: On
+  #       action: keep
 
-  - job_name: 'cadvisor'
-    ec2_sd_configs:
-      - region: us-east-1
-        port: 9010
-    relabel_configs:
-        # Only monitor instances which have a tag called Monitoring "Monitoring"
-      - source_labels: [__meta_ec2_tag_Monitoring]
-        regex: On
-        action: keep
+  # - job_name: 'cadvisor'
+  #   ec2_sd_configs:
+  #     - region: us-east-1
+  #       port: 9010
+  #   relabel_configs:
+  #       # Only monitor instances which have a tag called Monitoring "Monitoring"
+  #     - source_labels: [__meta_ec2_tag_Monitoring]
+  #       regex: On
+  #       action: keep

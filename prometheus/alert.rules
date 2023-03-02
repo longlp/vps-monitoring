@@ -41,30 +41,47 @@ groups:
 
 - name: containers
   rules:
-  - alert: jenkins_down
-    expr: absent(container_memory_usage_bytes{name="jenkins"})
+  - alert: postgresql_down
+    expr: absent(container_memory_usage_bytes{name="postgresql"})
     for: 30s
     labels:
       severity: critical
     annotations:
-      summary: "Jenkins down"
-      description: "Jenkins container is down for more than 30 seconds."
+      summary: "Postgresql down"
+      description: "Postgresql container is down for more than 30 seconds."
 
-  - alert: jenkins_high_cpu
-    expr: sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
+  - alert: postgresql_high_cpu
+    expr: sum(rate(container_cpu_usage_seconds_total{name="postgresql"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
     for: 30s
     labels:
       severity: warning
     annotations:
-      summary: "Jenkins high CPU usage"
-      description: "Jenkins CPU usage is {{ humanize $value}}%."
+      summary: "Postgresql high CPU usage"
+      description: "Postgresql CPU usage is {{ humanize $value}}%."
 
-  - alert: jenkins_high_memory
-    expr: sum(container_memory_usage_bytes{name="jenkins"}) > 1200000000
+  - alert: postgresql_high_memory
+    expr: sum(container_memory_usage_bytes{name="postgresql"}) > 1200000000
     for: 30s
     labels:
       severity: warning
     annotations:
-      summary: "Jenkins high memory usage"
-      description: "Jenkins memory consumption is at {{ humanize $value}}."
+      summary: "Postgresql high memory usage"
+      description: "Postgresql memory consumption is at {{ humanize $value}}."
 
+  - alert: elasticsearch_down
+    expr: absent(container_memory_usage_bytes{name="es01"})
+    for: 30s
+    labels:
+      severity: critical
+    annotations:
+      summary: "Elasticsearch down"
+      description: "Elasticsearch container is down for more than 30 seconds."
+
+  - alert: elasticsearch_high_cpu
+    expr: sum(rate(container_cpu_usage_seconds_total{name="es01"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Elasticsearch high CPU usage"
+      description: "Elasticsearch CPU usage is {{ humanize $value}}%."
