@@ -69,7 +69,7 @@ groups:
       description: "Postgresql memory consumption is at {{ humanize $value}}."
 
   - alert: elasticsearch_down
-    expr: absent(container_memory_usage_bytes{name="es01"})
+    expr: absent(container_memory_usage_bytes{container_label_com_docker_compose_project="elastic"})
     for: 30s
     labels:
       severity: critical
@@ -78,7 +78,7 @@ groups:
       description: "Elasticsearch container is down for more than 30 seconds."
 
   - alert: elasticsearch_high_cpu
-    expr: sum(rate(container_cpu_usage_seconds_total{name="es01"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
+    expr: sum(rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_project="elastic"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
     for: 30s
     labels:
       severity: warning
