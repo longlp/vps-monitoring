@@ -28,8 +28,7 @@ services:
       - ./loki/promtail-config.yaml:/etc/promtail/promtail-config.yaml
     command: -config.file=/etc/promtail/promtail-config.yaml
     restart: always
-    networks:
-      - monitor-net
+    network_mode: host
     labels:
       org.label-schema.group: "monitoring"
 
